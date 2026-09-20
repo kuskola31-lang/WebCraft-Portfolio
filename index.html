@@ -537,52 +537,6 @@
             font-size: 0.85rem;
         }
 
-        /* Contact Section */
-        .contact-section {
-            padding: 90px 0;
-        }
-
-        .contact-box {
-            background: linear-gradient(135deg, rgba(30, 33, 48, 0.8), rgba(15, 17, 26, 0.9));
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: 60px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            backdrop-filter: blur(20px);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            color: white;
-            font-size: 0.88rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--glass-border);
-            color: white;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 0 3px rgba(69, 243, 255, 0.15);
-        }
-
         /* Modal Viewer */
         .modal-overlay {
             position: fixed;
@@ -694,11 +648,10 @@
                 <li><a href="#showcase" class="nav-link">Live Демо</a></li>
                 <li><a href="#projects" class="nav-link">Проекты</a></li>
                 <li><a href="#skills" class="nav-link">Навыки</a></li>
-                <li><a href="#contact" class="nav-link">Контакты</a></li>
             </ul>
 
-            <a href="#contact" class="btn-glow">
-                Обсудить проект
+            <a href="#projects" class="btn-glow">
+                Смотреть проекты
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
         </div>
@@ -922,61 +875,6 @@
         </div>
     </section>
 
-    <!-- Contact & Lead Form -->
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <div class="contact-box">
-                <div>
-                    <span class="section-tag">Начните Сотрудничество</span>
-                    <h2 class="section-title" style="font-size: 2.2rem; margin-top: 10px;">Нужен Продающий Сайт Для Вашего Бизнеса?</h2>
-                    <p style="color: var(--text-muted); margin: 20px 0 30px 0;">
-                        Разработаю современный веб-сайт с высокой конверсией, быстрым временем загрузки и стильным дизайном.
-                    </p>
-
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <div style="display: flex; align-items: center; gap: 12px; color: white;">
-                            <span style="font-size: 1.3rem;">🚀</span> Быстрый запуск от 3 до 7 дней
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 12px; color: white;">
-                            <span style="font-size: 1.3rem;">🎯</span> Адаптировано под мобильные устройства
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 12px; color: white;">
-                            <span style="font-size: 1.3rem;">🤝</span> Гарантия качества и поддержка
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <form onsubmit="handleContactSubmit(event)">
-                        <div class="form-group">
-                            <label>Ваше Имя</label>
-                            <input type="text" class="form-control" placeholder="Алексей" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Телефон / Telegram</label>
-                            <input type="text" class="form-control" placeholder="@username или +7 (999) 000-00-00" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Какой сайт вам нужен?</label>
-                            <select class="form-control">
-                                <option>Лендинг под ключ</option>
-                                <option>Корпоративный сайт компании</option>
-                                <option>Сайт-каталог / Услуги</option>
-                                <option>Индивидуальная разработка</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn-glow" style="width: 100%; padding: 16px; justify-content: center; margin-top: 10px;">
-                            Отправить заявку
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -993,11 +891,6 @@
             <button class="btn-outline" style="padding: 6px 16px; border-radius: 20px;" onclick="closeModal()">✕ Закрыть</button>
         </div>
         <iframe class="modal-iframe" id="modalFrame" src=""></iframe>
-    </div>
-
-    <!-- Notification Toast -->
-    <div class="toast" id="toastNotif">
-        <span id="toastMsg">Спасибо! Ваша заявка отправлена.</span>
     </div>
 
     <script>
@@ -1051,21 +944,6 @@
         function closeModal() {
             document.getElementById('fullscreenModal').classList.remove('active');
             document.getElementById('modalFrame').src = '';
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toastNotif');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
-        }
-
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            showToast('Спасибо за обращение! Скоро свяжемся с вами.');
-            e.target.reset();
         }
     </script>
 </body>
