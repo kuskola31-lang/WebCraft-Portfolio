@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Health & Beauty — Оксана · Мастер и инструктор по маникюру, педикюру, подологии</title>
+<meta name="description" content="Маникюр, педикюр, наращивание, подология. Оксана — мастер и инструктор. Онлайн-запись." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-0: #0a0607;
+  --red-0: #d4324c;
+  --red-1: #a82338;
+  --cream: #ede4e2;
+  --text-0: #f2eae8;
+  --text-1: #c2b4b4;
+  --text-2: #7e7072;
+  --border: rgba(212, 50, 76, 0.12);
+  --border-hi: rgba(212, 50, 76, 0.35);
+  --font-h: 'Italiana', serif;
+  --font-q: 'Cormorant Garamond', serif;
+  --font-b: 'Inter', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-q);
+  background: var(--bg-0);
+  color: var(--text-0);
+  overflow-x: hidden;
+  line-height: 1.65;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* === ФОН === */
+.bg-photo {
+  position: fixed; inset: 0; z-index: -3;
+  pointer-events: none; overflow: hidden;
+}
+.bg-photo img {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130vh; max-width: 90vw; height: auto;
+  opacity: 0.16;
+  filter: grayscale(0.2) contrast(1.05) brightness(0.9);
+  animation: bgFloat 20s ease-in-out infinite;
+}
+@keyframes bgFloat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(-2deg); }
+  50% { transform: translate(-50%, -52%) scale(1.04) rotate(2deg); }
+}
+.bg-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(10,6,7,0.4) 0%, rgba(10,6,7,0.85) 55%, rgba(10,6,7,0.98) 100%),
+    linear-gradient(180deg, rgba(10,6,7,0.7) 0%, rgba(10,6,7,0.85) 100%);
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -2;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(212, 50, 76, 0.1), transparent 55%),
+    radial-gradient(ellipse at 80% 85%, rgba(110, 23, 39, 0.15), transparent 55%);
+  pointer-events: none;
+}
+
+/* === NAV === */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(180deg, rgba(10,6,7,0.92) 0%, rgba(10,6,7,0.4) 100%);
+  border-bottom: 1px solid var(--border);
+  transition: padding .3s ease;
+}
+.logo {
+  font-family: var(--font-h);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 1.5px;
+  color: var(--cream);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.logo::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--red-0); border-radius: 50%;
+  box-shadow: 0 0 12px rgba(212, 50, 76, 0.6);
+  animation: pulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.logo em { font-style: italic; color: var(--red-0); }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+.nav-links {
+  display: flex; gap: 28px; align-items: center;
+  flex-wrap: nowrap; min-width: 0;
+}
+.nav-links a.nav-link {
+  color: var(--text-1); text-decoration: none;
+  font-family: var(--font-b);
+  font-size: 11.5px; letter-spacing: 1.5px;
+  text-transform: uppercase; transition: color .3s ease;
+  position: relative; padding: 6px 0;
+  white-space: nowrap;
+}
+.nav-links a.nav-link::after {
+  content: ''; position: absolute; left: 0; bottom: 0;
+  width: 0; height: 1px; background: var(--red-0);
+  transition: width .35s var(--ease);
+}
+.nav-links a.nav-link:hover { color: var(--red-0); }
+.nav-links a.nav-link:hover::after { width: 100%; }
+.nav-phone {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--red-0) !important;
+  font-family: var(--font-q);
+  font-size: 16px !important;
+  letter-spacing: 0.5px !important;
+  text-transform: none !important;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-phone:hover { color: var(--cream) !important; }
+.nav-phone svg { width: 14px; height: 14px; flex-shrink: 0; }
+.nav-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 11px 26px;
+  border: 1px solid var(--border-hi);
+  border-radius: 40px;
+  background: rgba(212, 50, 76, 0.05);
+  color: var(--red-0) !important;
+  font-family: var(--font-b);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  text-decoration: none;
+  transition: all .35s var(--ease);
+  white-space: nowrap; line-height: 1;
+  flex-shrink: 0;
+}
+.nav-cta:hover {
+  background: var(--red-1); color: #fff !important;
+  border-color: var(--red-1);
+}
+
+/* === HERO === */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 170px 40px 100px;
+  position: relative;
+}
+.hero-inner { max-width: 1000px; position: relative; z-index: 2; }
+.badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 20px; border-radius: 30px;
+  background: rgba(212, 50, 76, 0.06);
+  border: 1px solid var(--border-hi);
+  font-family: var(--font-b);
+  font-size: 10.5px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--red-0);
+  margin-bottom: 34px;
+  animation: fadeUp .9s ease both;
+}
+.badge .dot {
+  width: 5px; height: 5px;
+  background: var(--red-0); border-radius: 50%;
+  animation: pulse 1.6s infinite;
+}
+.hero h1 {
+  font-family: var(--font-h);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+  animation: fadeUp 1s .1s ease both;
+}
+.hero h1 em { font-style: italic; color: var(--red-0); }
+.hero p.sub {
+  font-family: var(--font-q);
+  font-style: italic;
+  font-size: clamp(18px, 1.7vw, 22px);
+  color: var(--text-1);
+  max-width: 680px;
+  margin: 0 auto 42px;
+  font-weight: 300;
+  line-height: 1.6;
+  animation: fadeUp 1.1s .25s ease both;
+}
+
+/* Быстрые контакты */
+.quick-contacts {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 12px;
+  margin-bottom: 42px;
+  animation: fadeUp 1.1s .35s ease both;
+}
+.contact-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 26px;
+  border-radius: 12px;
+  background: rgba(18, 10, 12, 0.7);
+  border: 1px solid var(--border-hi);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--text-0);
+  text-decoration: none;
+  font-family: var(--font-q);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all .4s var(--ease);
+  white-space: nowrap;
+}
+.contact-pill svg {
+  width: 17px; height: 17px;
+  stroke: var(--red-0); fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.contact-pill:hover {
+  border-color: var(--red-0);
+  background: rgba(26, 14, 17, 0.9);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.contact-pill.primary {
+  background: var(--red-1);
+  border-color: var(--red-1);
+  color: #fff;
+}
+.contact-pill.primary svg { stroke: #fff; }
+.contact-pill.primary:hover {
+  background: var(--red-0);
+  box-shadow: 0 14px 44px rgba(212, 50, 76, 0.5);
+}
+.hero-cta {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 1.1s .45s ease both;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 36px;
+  border-radius: 10px;
+  font-family: var(--font-b);
+  font-weight: 500; font-size: 12px;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  border: none; transition: all .4s var(--ease);
+  position: relative; overflow: hidden;
+}
+.btn svg { width: 15px; height: 15px; }
+.btn-ghost {
+  background: rgba(255,255,255,0.02);
+  color: var(--text-0);
+  border: 1px solid var(--border-hi);
+}
+.btn-ghost:hover {
+  background: rgba(212, 50, 76, 0.08);
+  border-color: var(--red-0);
+  transform: translateY(-2px);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === SECTIONS === */
+section {
+  padding: 110px 80px;
+  position: relative;
+  scroll-margin-top: 90px;
+}
+.section-head {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 70px;
+}
+.section-label {
+  font-family: var(--font-b);
+  font-size: 11px; letter-spacing: 5px;
+  color: var(--red-0); text-transform: uppercase;
+  margin-bottom: 18px; display: block;
+}
+.section-head h2 {
+  font-family: var(--font-h);
+  font-weight: 400;
+  font-size: clamp(34px, 4.5vw, 58px);
+  line-height: 1.15; letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.section-head h2 em { font-style: italic; color: var(--red-0); }
+.section-head p {
+  color: var(--text-2);
+  font-family: var(--font-q);
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* === УСЛУГИ === */
+.category {
+  max-width: 1300px;
+  margin: 0 auto 70px;
+}
+.category:last-child { margin-bottom: 0; }
+.category-title {
+  font-family: var(--font-h);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--red-0);
+  padding-bottom: 16px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.category-title::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--red-0);
+  flex-shrink: 0;
+}
+.category-count {
+  font-family: var(--font-b);
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  color: var(--text-2);
+  font-style: normal;
+  margin-left: auto;
+  text-transform: uppercase;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.service-card {
+  padding: 24px 26px;
+  border-radius: 12px;
+  background: rgba(18, 10, 12, 0.7);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all .5s var(--ease);
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red-0), transparent);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-hi);
+  background: rgba(26, 14, 17, 0.9);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.service-card:hover::before { opacity: 1; }
+.service-card h3 {
+  font-family: var(--font-q);
+  font-weight: 500; font-size: 18px;
+  line-height: 1.35; letter-spacing: 0.2px;
+  color: var(--text-0);
+}
+.service-meta {
+  display: flex; justify-content: space-between;
+  align-items: baseline; gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  margin-top: auto; flex-wrap: wrap;
+}
+.service-price {
+  font-family: var(--font-q);
+  font-size: 20px; font-weight: 600;
+  color: var(--red-0);
+  letter-spacing: 0.3px;
+}
+.service-time {
+  font-family: var(--font-b);
+  font-size: 11px;
+  color: var(--text-2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* === ABOUT === */
+.about {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  max-width: 1300px; margin: 0 auto;
+}
+.about-img {
+  aspect-ratio: 4/5;
+  border-radius: 12px;
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(18, 10, 12, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .6s var(--ease);
+}
+.about-img img {
+  width: 75%;
+  filter: drop-shadow(0 15px 40px rgba(0,0,0,0.6));
+  opacity: 0.95;
+}
+.about-img:hover {
+  border-color: var(--border-hi);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  transform: translateY(-4px);
+}
+.about-text h2 {
+  font-family: var(--font-h);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 48px);
+  line-height: 1.15;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+.about-text h2 em { font-style: italic; color: var(--red-0); }
+.about-text p {
+  color: var(--text-1);
+  font-family: var(--font-q);
+  font-size: 18px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+.about-sign {
+  font-family: var(--font-h);
+  font-size: 26px;
+  color: var(--red-0);
+  margin-top: 34px;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+.about-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 44px; padding-top: 36px;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: var(--font-h);
+  font-size: 38px; font-weight: 400;
+  color: var(--red-0); line-height: 1; margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.stat-label {
+  font-family: var(--font-b);
+  font-size: 10.5px; color: var(--text-2);
+  letter-spacing: 1.8px; text-transform: uppercase;
+}
+
+/* === CTA === */
+.cta {
+  padding: 70px 40px 20px;
+  text-align: center; max-width: 900px;
+  margin: 0 auto;
+}
+.cta-box {
+  padding: 70px 50px;
+  border-radius: 20px;
+  background: rgba(26, 14, 17, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-hi);
+  position: relative; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.cta-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red-0), transparent);
+}
+.cta-box h2 {
+  font-family: var(--font-h);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 48px);
+  margin-bottom: 18px; line-height: 1.15;
+  letter-spacing: 1px;
+}
+.cta-box h2 em { font-style: italic; color: var(--red-0); }
+.cta-box p {
+  color: var(--text-1);
+  font-family: var(--font-q);
+  font-size: 19px;
+  max-width: 540px; margin: 0 auto 36px;
+  line-height: 1.6; font-weight: 300;
+  font-style: italic;
+}
+.btn-primary {
+  background: var(--red-1);
+  color: #fff;
+  padding: 18px 44px;
+  font-size: 12.5px;
+  box-shadow: 0 8px 30px rgba(168, 35, 56, 0.35);
+  letter-spacing: 2px;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  transition: left .7s ease;
+}
+.btn-primary:hover::after { left: 100%; }
+.btn-primary:hover {
+  background: var(--red-0);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(212, 50, 76, 0.45);
+}
+
+/* === CONTACTS === */
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px; max-width: 1300px;
+  margin: 0 auto;
+}
+.contact-card {
+  padding: 38px 30px;
+  border-radius: 14px;
+  background: rgba(18, 10, 12, 0.72);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  transition: all .5s var(--ease);
+}
+.contact-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hi);
+  background: rgba(26, 14, 17, 0.85);
+}
+.contact-icon {
+  font-size: 22px;
+  color: var(--red-0);
+  margin-bottom: 18px;
+  display: block;
+  transition: transform .4s ease;
+}
+.contact-card:hover .contact-icon { transform: scale(1.1); }
+.contact-card h4 {
+  font-family: var(--font-h);
+  font-size: 22px; font-weight: 400;
+  color: var(--text-0); margin-bottom: 14px;
+  letter-spacing: 1.5px;
+}
+.contact-card p {
+  color: var(--text-1);
+  font-family: var(--font-q);
+  font-size: 17px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+.contact-card p strong { color: var(--red-0); font-weight: 600; }
+.contact-card a {
+  color: var(--text-0);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-hi);
+  transition: all .3s ease;
+}
+.contact-card a:hover {
+  color: var(--red-0);
+  border-bottom-color: var(--red-0);
+}
+
+/* === FOOTER === */
+footer {
+  padding: 60px 40px 40px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  background: rgba(10, 6, 7, 0.6);
+  backdrop-filter: blur(10px);
+}
+.footer-logo {
+  font-family: var(--font-h);
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--cream);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+.footer-logo span { color: var(--red-0); font-style: italic; }
+footer p {
+  font-family: var(--font-q);
+  font-size: 15px;
+  color: var(--text-2);
+  font-style: italic;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1100px) {
+  .nav { padding: 14px 24px; gap: 12px; }
+  .nav-links { gap: 18px; }
+  .nav-links a.nav-link { display: none; }
+  .nav-phone { font-size: 15px !important; }
+}
+@media (max-width: 720px) {
+  .nav { padding: 12px 16px; gap: 8px; }
+  .logo { font-size: 18px; letter-spacing: 1px; }
+  .logo::before { width: 5px; height: 5px; }
+  .nav-phone { font-size: 13px !important; gap: 5px; }
+  .nav-phone svg { width: 12px; height: 12px; }
+  .nav-cta { padding: 9px 16px; font-size: 10px; letter-spacing: 1px; }
+}
+@media (max-width: 500px) {
+  .nav { padding: 11px 12px; }
+  .logo { font-size: 16px; }
+  .logo em { display: none; }
+  .nav-phone { font-size: 12px !important; }
+  .nav-cta { padding: 8px 14px; font-size: 9.5px; letter-spacing: 0.8px; }
+  section { padding: 80px 20px; }
+  .hero { padding: 120px 20px 70px; }
+  .about { grid-template-columns: 1fr; gap: 40px; }
+  .about-img { max-width: 340px; margin: 0 auto; }
+  .about-stats { grid-template-columns: 1fr; gap: 22px; text-align: center; }
+  .cta-box { padding: 44px 24px; }
+  .contact-pill { font-size: 15px; padding: 12px 18px; }
+  .quick-contacts { gap: 8px; }
+  footer { padding: 40px 20px 30px; }
+  .bg-photo img { width: 90vh; opacity: 0.12; }
+}
+</style>
+</head>
+<body>
+
+<!-- ФОН -->
+<div class="bg-photo">
+  <img src="foot.png" alt="" />
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="logo">Health<em>&amp;</em>Beauty</a>
+  <div class="nav-links">
+    <a href="#services" class="nav-link">Услуги</a>
+    <a href="#about" class="nav-link">Обо мне</a>
+    <a href="#contacts" class="nav-link">Контакты</a>
+    <a href="tel:+79068931807" class="nav-phone">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +7 906 893-18-07
+    </a>
+    <a href="https://mst.link/roksana_nails" target="_blank" rel="noopener" class="nav-cta">Записаться</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="badge"><span class="dot"></span> Оксана — мастер &amp; инструктор</div>
+    <h1>
+      Красота рук и ног —<br>
+      <em>искусство заботы</em>
+    </h1>
+    <p class="sub">
+      Я — Оксана, мастер и инструктор по маникюру, педикюру и подологии. Обучаю мастеров, веду клиентов и работаю одна — чтобы каждая процедура была сделана лично мной, без компромиссов.
+    </p>
+
+    <div class="quick-contacts">
+      <a href="https://mst.link/roksana_nails" target="_blank" rel="noopener" class="contact-pill primary">
+        <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+        Онлайн-запись
+      </a>
+      <a href="tel:+79068931807" class="contact-pill">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +7 906 893-18-07
+      </a>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#services" class="btn btn-ghost">Смотреть услуги и цены</a>
+    </div>
+  </div>
+</header>
+
+<!-- УСЛУГИ -->
+<section id="services">
+  <div class="section-head">
+    <span class="section-label">// услуги и цены</span>
+    <h2>Прайс-лист <em>мастера</em></h2>
+    <p>Все цены указаны «от» — точная стоимость зависит от состояния ногтей и объёма работы.</p>
+  </div>
+
+  <!-- МАНИКЮР -->
+  <div class="category">
+    <h3 class="category-title">Маникюр. Эстетика <span class="category-count">8 услуг</span></h3>
+    <div class="services-grid">
+      <div class="service-card"><h3>Маникюр</h3><div class="service-meta"><span class="service-price">от 1 600 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Наращивание ногтей до 5 мм</h3><div class="service-meta"><span class="service-price">от 4 000 ₽</span><span class="service-time">3 часа</span></div></div>
+      <div class="service-card"><h3>Наращивание ногтей (коррекция)</h3><div class="service-meta"><span class="service-price">от 3 600 ₽</span><span class="service-time">2 ч 30 мин</span></div></div>
+      <div class="service-card"><h3>Маникюр анатомический «Лысая фреза»</h3><div class="service-meta"><span class="service-price">от 2 300 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Снятие покрытия + маникюр (гигиена)</h3><div class="service-meta"><span class="service-price">от 2 000 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Пакет 1</h3><div class="service-meta"><span class="service-price">от 2 400 ₽</span><span class="service-time">1 ч 45 мин</span></div></div>
+      <div class="service-card"><h3>Пакет 2</h3><div class="service-meta"><span class="service-price">от 2 600 ₽</span><span class="service-time">1 ч 45 мин</span></div></div>
+      <div class="service-card"><h3>Пакет 3</h3><div class="service-meta"><span class="service-price">от 3 200 ₽</span><span class="service-time">2 ч 30 мин</span></div></div>
+    </div>
+  </div>
+
+  <!-- ПЕДИКЮР -->
+  <div class="category">
+    <h3 class="category-title">Педикюр. Эстетика <span class="category-count">7 услуг</span></h3>
+    <div class="services-grid">
+      <div class="service-card"><h3>Педикюр МИНИ — 1</h3><div class="service-meta"><span class="service-price">от 2 000 ₽</span><span class="service-time">45 мин</span></div></div>
+      <div class="service-card"><h3>Педикюр МИНИ — 2</h3><div class="service-meta"><span class="service-price">от 2 800 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Подстричь / опилить ногти</h3><div class="service-meta"><span class="service-price">от 700 ₽</span><span class="service-time">15 мин</span></div></div>
+      <div class="service-card"><h3>Пилинг-педикюр — НОРМ 1</h3><div class="service-meta"><span class="service-price">от 3 000 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Пилинг-педикюр — ПРОФИ 1</h3><div class="service-meta"><span class="service-price">от 3 700 ₽</span><span class="service-time">1 ч 15 мин</span></div></div>
+      <div class="service-card"><h3>Пилинг-педикюр — НОРМ 2</h3><div class="service-meta"><span class="service-price">от 3 800 ₽</span><span class="service-time">1 ч 15 мин</span></div></div>
+      <div class="service-card"><h3>Пилинг-педикюр — ПРОФИ 2</h3><div class="service-meta"><span class="service-price">от 4 500 ₽</span><span class="service-time">1 ч 30 мин</span></div></div>
+    </div>
+  </div>
+
+  <!-- ДИЗАЙНЫ -->
+  <div class="category">
+    <h3 class="category-title">Дизайны <span class="category-count">1 услуга</span></h3>
+    <div class="services-grid">
+      <div class="service-card"><h3>Дизайны (любой сложности)</h3><div class="service-meta"><span class="service-price">от 500 ₽</span><span class="service-time">30 мин</span></div></div>
+    </div>
+  </div>
+
+  <!-- ПОДОЛОГИЯ -->
+  <div class="category">
+    <h3 class="category-title">Подология <span class="category-count">18 услуг</span></h3>
+    <div class="services-grid">
+      <div class="service-card"><h3>Подологический маникюр</h3><div class="service-meta"><span class="service-price">от 2 000 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Подологический педикюр без грибка</h3><div class="service-meta"><span class="service-price">от 4 300 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Подологический педикюр с грибком</h3><div class="service-meta"><span class="service-price">от 6 000 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Обработка вросшего ногтя</h3><div class="service-meta"><span class="service-price">от 1 500 ₽</span><span class="service-time">45 мин</span></div></div>
+      <div class="service-card"><h3>Установка титановой нити</h3><div class="service-meta"><span class="service-price">от 2 500 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Коррекция титановой нити</h3><div class="service-meta"><span class="service-price">от 2 000 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Обработка онихогрифоза</h3><div class="service-meta"><span class="service-price">от 2 000 ₽</span><span class="service-time">45 мин</span></div></div>
+      <div class="service-card"><h3>Протезирование ногтевой пластины</h3><div class="service-meta"><span class="service-price">от 1 000 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Протезирование ногтевой пластины с грибком</h3><div class="service-meta"><span class="service-price">от 1 800 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Снятие протезирования ногтевой пластины</h3><div class="service-meta"><span class="service-price">от 500 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Обработка вульгарной бородавки</h3><div class="service-meta"><span class="service-price">от 500 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Обработка подошвенной бородавки</h3><div class="service-meta"><span class="service-price">от 500 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Обработка стержневой мозоли / натоптыша</h3><div class="service-meta"><span class="service-price">от 1 000 ₽</span><span class="service-time">45 мин</span></div></div>
+      <div class="service-card"><h3>Обработка трещин (низкая сложность)</h3><div class="service-meta"><span class="service-price">от 1 200 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Обработка трещин (высокая сложность)</h3><div class="service-meta"><span class="service-price">от 1 700 ₽</span><span class="service-time">1 час</span></div></div>
+      <div class="service-card"><h3>Тампонирование во время педикюра</h3><div class="service-meta"><span class="service-price">от 500 ₽</span><span class="service-time">15 мин</span></div></div>
+      <div class="service-card"><h3>Тампонирование отдельное</h3><div class="service-meta"><span class="service-price">от 1 000 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Тейпирование</h3><div class="service-meta"><span class="service-price">от 500 ₽</span><span class="service-time">30 мин</span></div></div>
+    </div>
+  </div>
+
+  <!-- ФЬЮДЖН-УХОД -->
+  <div class="category">
+    <h3 class="category-title">Фьюджн-уход: красота и здоровье <span class="category-count">4 услуги</span></h3>
+    <div class="services-grid">
+      <div class="service-card"><h3>Spa-уход ROSILAK для рук с лечебным эффектом</h3><div class="service-meta"><span class="service-price">от 500 ₽</span><span class="service-time">15 мин</span></div></div>
+      <div class="service-card"><h3>Глянцевание ногтей ног ROSILAK</h3><div class="service-meta"><span class="service-price">от 1 000 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Глянцевание ногтей рук ROSILAK</h3><div class="service-meta"><span class="service-price">от 1 000 ₽</span><span class="service-time">30 мин</span></div></div>
+      <div class="service-card"><h3>Spa-уход ROSILAK для ног с лечебным эффектом</h3><div class="service-meta"><span class="service-price">от 700 ₽</span><span class="service-time">20 мин</span></div></div>
+    </div>
+  </div>
+
+  <!-- СОПУТСТВУЮЩИЕ -->
+  <div class="category">
+    <h3 class="category-title">Сопутствующие услуги <span class="category-count">4 услуги</span></h3>
+    <div class="services-grid">
+      <div class="service-card"><h3>Восстановление архитектуры 1 ногтя</h3><div class="service-meta"><span class="service-price">от 100 ₽</span><span class="service-time">5 мин</span></div></div>
+      <div class="service-card"><h3>Наращивание 1 ногтя</h3><div class="service-meta"><span class="service-price">от 150 ₽</span><span class="service-time">15 мин</span></div></div>
+      <div class="service-card"><h3>Снятие покрытия в педикюре</h3><div class="service-meta"><span class="service-price">от 200 ₽</span><span class="service-time">15 мин</span></div></div>
+      <div class="service-card"><h3>Снятие покрытия без последующих процедур</h3><div class="service-meta"><span class="service-price">от 700 ₽</span><span class="service-time">45 мин</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-img">
+      <img src="foot.png" alt="Оксана — мастер и инструктор" />
+    </div>
+    <div class="about-text">
+      <span class="section-label">// обо мне</span>
+      <h2>Оксана — <em>мастер и инструктор</em></h2>
+      <p>Я не просто мастер — я <strong>инструктор</strong>. Обучаю других мастеров тонкостям маникюра, педикюра и подологии. Мои ученики уже работают в разных городах, и я горжусь каждым из них.</p>
+      <p>Работаю одна — без администраторов и «команд». Каждую процедуру делаю лично я: от диагностики до финального покрытия. Это значит, что результат зависит только от моего уровня — и я отвечаю за него перед каждым клиентом.</p>
+      <p>Приходите за заботой и здоровьем. Я разбираюсь в подологии, использую профессиональные материалы и подбираю уход под каждого конкретного человека.</p>
+      <div class="about-sign">— Оксана</div>
+      <div class="about-stats">
+        <div><div class="stat-num">8+</div><div class="stat-label">лет опыта</div></div>
+        <div><div class="stat-num">4200</div><div class="stat-label">клиентов</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">стерильность</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="cta">
+    <div class="cta-box">
+      <h2>Буду рада видеть <em>вас у себя</em></h2>
+      <p>Запишитесь онлайн прямо сейчас — выберите удобное время и услугу. Отвечаю лично я.</p>
+      <a href="https://mst.link/roksana_nails" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+        Записаться онлайн
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts">
+  <div class="section-head">
+    <span class="section-label">// контакты</span>
+    <h2>Жду вас <em>у себя</em></h2>
+  </div>
+
+  <div class="contacts-grid">
+    <div class="contact-card">
+      <span class="contact-icon">◷</span>
+      <h4>Часы работы</h4>
+      <p>
+        <strong>Пн–Пт:</strong> 10:00 — 20:00<br>
+        <strong>Сб:</strong> 11:00 — 18:00<br>
+        <strong>Вс:</strong> выходной
+      </p>
+    </div>
+    <div class="contact-card">
+      <span class="contact-icon">☎</span>
+      <h4>Телефон</h4>
+      <p>
+        <a href="tel:+79068931807"><strong>+7 906 893-18-07</strong></a><br>
+        Звонок или WhatsApp<br>
+        Отвечаю лично я
+      </p>
+    </div>
+    <div class="contact-card">
+      <span class="contact-icon">✦</span>
+      <h4>Онлайн-запись</h4>
+      <p>
+        <a href="https://mst.link/roksana_nails" target="_blank" rel="noopener"><strong>mst.link/roksana_nails</strong></a><br>
+        Выберите услугу и время<br>
+        Запись за 1 минуту
+      </p>
+    </div>
+    <!-- ВСТАВЬ ССЫЛКУ НА 2ГИС: в href="..." вставь ссылку, в текст вставь адрес -->
+    <div class="contact-card">
+      <span class="contact-icon">◉</span>
+      <h4>Адрес</h4>
+      <p>
+        <a href="#" target="_blank" rel="noopener"><strong>Открыть в 2ГИС</strong></a><br>
+        Нажмите, чтобы проложить маршрут<br>
+        <!-- Здесь можно написать сам адрес текстом -->
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Health<span>&amp;</span>Beauty</div>
+  <p>© 2026 Health &amp; Beauty — Оксана, мастер и инструктор. Все права защищены.</p>
+</footer>
+
+<script>
+(function () {
+  const bg = document.querySelector('.bg-photo img');
+  if (!bg) return;
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    bg.style.transform = `translate(calc(-50% + ${x * 20}px), calc(-50% + ${y * 20}px)) scale(1.02)`;
+  });
+})();
+
+(function () {
+  const items = document.querySelectorAll('.service-card, .contact-card, .about-text, .about-img, .cta-box, .category');
+  items.forEach((el) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)';
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, Math.min(i * 40, 400));
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+  items.forEach(el => io.observe(el));
+})();
+
+(function () {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+})();
+
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.style.padding = window.innerWidth <= 720 ? '10px 16px' : '12px 40px';
+    } else {
+      nav.style.padding = window.innerWidth <= 720 ? '12px 16px' : '16px 40px';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
